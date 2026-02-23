@@ -20,6 +20,33 @@ body {
     overflow-x: hidden;
 }
 
+/* Floating animation */
+@keyframes floatCard {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0px); }
+}
+
+.card {
+    background: rgba(255,255,255,0.82);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 25px;
+    padding: 25px;
+    margin: 25px auto;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    border: 2px solid rgba(255,255,255,0.4);
+    animation: floatCard 6s ease-in-out infinite;
+    transition: transform 0.3s ease;
+}
+
+/* Slight lift on hover */
+.card:hover {
+    transform: translateY(-12px);
+}
+    
 /* Cards */
 .card {
     background: rgba(255, 255, 255, 0.8); /* 80% white */
@@ -42,13 +69,21 @@ input, select {
 
 /* Button */
 button {
-    padding:10px 15px;
-    border:none;
-    border-radius:8px;
-    background:#3b4cca;
-    color:white;
-    cursor:pointer;
-    font-weight:bold;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(45deg, #3b4cca, #ffcb05);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Glow on hover */
+button:hover {
+    box-shadow: 0 0 15px rgba(255, 203, 5, 0.8),
+                0 0 30px rgba(59, 76, 202, 0.6);
+    transform: scale(1.08);
 }
 
 button:hover {
@@ -185,6 +220,8 @@ function submitRSVP() {
 // Countdown
 const eventDate = new Date("May 11, 2026 15:00:00").getTime();
 
+const countdownEl = document.getElementById("countdown");
+
 setInterval(function(){
     const now = new Date().getTime();
     const distance = eventDate - now;
@@ -194,9 +231,12 @@ setInterval(function(){
     const minutes = Math.floor((distance%(1000*60*60))/(1000*60));
     const seconds = Math.floor((distance%(1000*60))/1000);
 
-    document.getElementById("countdown").innerHTML =
-      days + "d " + hours + "h " + minutes + "m " + seconds + "s";
-
+    countdownEl.innerHTML = `
+      <div class="count-box">${days}<span>Days</span></div>
+      <div class="count-box">${hours}<span>Hours</span></div>
+      <div class="count-box">${minutes}<span>Minutes</span></div>
+      <div class="count-box">${seconds}<span>Seconds</span></div>
+    `;
 },1000);
 
 // Music autoplay after first click
@@ -210,6 +250,7 @@ window.addEventListener("click", function() {
 </body>
 
 </html>
+
 
 
 
