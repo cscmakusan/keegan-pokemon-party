@@ -157,22 +157,22 @@ function submitRSVP() {
     message: document.getElementById("message").value
   };
 
-  fetch(scriptURL, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(data)
-  })
-  .then(response => response.json())
-  .then(res => {
+ fetch(scriptURL, {
+  method: "POST",
+  mode: "cors",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify(data)
+})
+.then(response => response.text())
+.then(res => {
     document.getElementById("status").innerHTML = "✅ RSVP Sent!";
-    document.getElementById("name").value = "";
-    document.getElementById("message").value = "";
-  })
-  .catch(error => {
+})
+.catch(error => {
+    console.error(error);
     document.getElementById("status").innerHTML = "❌ Error sending RSVP";
-  });
+});
 }
 
 // 🎵 Autoplay after first click
@@ -202,4 +202,5 @@ setInterval(function(){
 </body>
 
 </html>
+
 
