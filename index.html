@@ -1,156 +1,202 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Keegan's 7th Birthday - Pokémon Party</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Keegan's 7th Pokémon Party</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(to bottom right, #ffcb05, #3b4cca);
-            text-align: center;
-            color: white;
-        }
+<style>
 
-        h1 {
-            margin-top: 20px;
-        }
+body {
+    margin:0;
+    font-family: Arial, sans-serif;
+    text-align:center;
+    color:white;
+    background:
+        linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+        url('pokemon-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    overflow-x: hidden;
+}
 
-        .card {
-            background: white;
-            color: #333;
-            margin: 20px auto;
-            padding: 20px;
-            border-radius: 15px;
-            width: 90%;
-            max-width: 600px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        }
+/* Cards */
+.card {
+    background:white;
+    color:black;
+    margin:20px auto;
+    padding:20px;
+    border-radius:15px;
+    width:90%;
+    max-width:600px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+}
 
-        .countdown {
-            font-size: 24px;
-            font-weight: bold;
-            color: #e63946;
-        }
+/* Inputs */
+input, select {
+    padding:8px;
+    border-radius:6px;
+    border:1px solid #ccc;
+}
 
-        .gallery img {
-            width: 120px;
-            height: 120px;
-            object-fit: cover;
-            border-radius: 10px;
-            margin: 5px;
-        }
+/* Button */
+button {
+    padding:10px 15px;
+    border:none;
+    border-radius:8px;
+    background:#3b4cca;
+    color:white;
+    cursor:pointer;
+    font-weight:bold;
+}
 
-        input {
-            padding: 8px;
-            margin: 5px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
+button:hover {
+    background:#2a35a0;
+}
 
-        button {
-            padding: 8px 15px;
-            border: none;
-            border-radius: 8px;
-            background-color: #3b4cca;
-            color: white;
-            cursor: pointer;
-        }
+/* Floating Pokeballs */
+.pokeball {
+    position: fixed;
+    width: 70px;
+    opacity: 0.9;
+    animation: floatUp linear infinite;
+    z-index: 0;
+}
 
-        ul {
-            list-style: none;
-            padding: 0;
-        }
+@keyframes floatUp {
+    0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+    }
+    20% { opacity: 1; }
+    100% {
+        transform: translateY(-120vh) rotate(360deg);
+        opacity: 0;
+    }
+}
 
-        li {
-            background: #f1f1f1;
-            margin: 5px;
-            padding: 8px;
-            border-radius: 6px;
-        }
-    </style>
+.content {
+    position: relative;
+    z-index: 2;
+}
+
+</style>
 </head>
 
 <body>
+
+<!-- 🎵 Background Music -->
+<audio id="bgMusic" loop>
+  <source src="pokemon-theme.mp3" type="audio/mpeg">
+</audio>
+
+<!-- Floating Pokeballs -->
+<img src="pokeball.png" class="pokeball" style="left:10%; animation-duration:12s;">
+<img src="pokeball.png" class="pokeball" style="left:30%; animation-duration:18s;">
+<img src="pokeball.png" class="pokeball" style="left:60%; animation-duration:15s;">
+<img src="pokeball.png" class="pokeball" style="left:80%; animation-duration:20s;">
+
+<div class="content">
 
 <h1>⚡ Pokémon Party ⚡</h1>
 <h2>Keegan Alcaeus Velasco</h2>
 <h3>Turning 7 on May 11, 2026</h3>
 
 <div class="card">
-    <h3>📍 Location</h3>
-    <p>Alconaba Resort</p>
+<h3>📅 May 11, 2026</h3>
+<h3>📍 Alconaba Resort</h3>
 
-    <h3>📅 Date</h3>
-    <p>May 11, 2026</p>
-
-    <h3>⏳ Countdown</h3>
-    <div id="countdown" class="countdown"></div>
+<h3>⏳ Countdown</h3>
+<div id="countdown"></div>
 </div>
 
 <div class="card">
-    <h3>🎵 Party Music</h3>
-    <audio controls autoplay loop>
-        <source src="pokemon-theme.mp3" type="audio/mpeg">
-        Your browser does not support audio.
-    </audio>
-    <p>(Upload pokemon-theme.mp3 in same folder)</p>
+<h3>🗺 Location Map</h3>
+<iframe 
+  src="https://www.google.com/maps?q=Alconaba+Resort&output=embed"
+  width="100%" height="300" style="border:0;">
+</iframe>
 </div>
 
 <div class="card">
-    <h3>📸 Photo Gallery</h3>
-    <div class="gallery">
-        <img src="Keegan0.jpg">
-        <img src="Keegan2.jpg">
-        <img src="Keegan3.jpg">
-    </div>
-    <p>(Replace with Keegan's photos)</p>
+<h3>🎟 RSVP</h3>
+
+<input type="text" id="name" placeholder="Your Name"><br><br>
+
+<select id="attending">
+  <option value="Yes">Yes, I'll be there!</option>
+  <option value="No">Sorry, can't come</option>
+</select><br><br>
+
+<input type="text" id="message" placeholder="Message (optional)"><br><br>
+
+<button onclick="submitRSVP()">Submit</button>
+
+<p id="status"></p>
 </div>
 
-<div class="card">
-    <h3>🎟 RSVP</h3>
-    <input type="text" id="guestName" placeholder="Your Name">
-    <button onclick="addGuest()">Confirm Attendance</button>
-
-    <h4>Guest List:</h4>
-    <ul id="guestList"></ul>
 </div>
 
 <script>
-    // Countdown Timer
-    const eventDate = new Date("May 11, 2026 15:00:00").getTime();
 
-    const timer = setInterval(function() {
-        const now = new Date().getTime();
-        const distance = eventDate - now;
+// 🔥 YOUR GOOGLE SCRIPT URL
+const scriptURL = "https://script.google.com/macros/s/AKfycbytvN-Ecn68u3e7FykFffiZOo1UcJt9rzzUn9g798qaW3YwEMFCl8MD4-bbggjC_s9C1w/exec";
 
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+function submitRSVP() {
 
-        document.getElementById("countdown").innerHTML =
-            days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+  const name = document.getElementById("name").value;
 
-        if (distance < 0) {
-            clearInterval(timer);
-            document.getElementById("countdown").innerHTML = "🎉 Party Time! 🎉";
-        }
-    }, 1000);
+  if(name.trim() === "") {
+    document.getElementById("status").innerHTML = "⚠ Please enter your name.";
+    return;
+  }
 
-    // Guest List
-    function addGuest() {
-        const name = document.getElementById("guestName").value;
-        if (name === "") return;
+  const data = {
+    name: name,
+    attending: document.getElementById("attending").value,
+    message: document.getElementById("message").value
+  };
 
-        const li = document.createElement("li");
-        li.textContent = name;
-        document.getElementById("guestList").appendChild(li);
+  fetch(scriptURL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(data)
+  })
+  .then(response => response.json())
+  .then(res => {
+    document.getElementById("status").innerHTML = "✅ RSVP Sent!";
+    document.getElementById("name").value = "";
+    document.getElementById("message").value = "";
+  })
+  .catch(error => {
+    document.getElementById("status").innerHTML = "❌ Error sending RSVP";
+  });
+}
 
-        document.getElementById("guestName").value = "";
-    }
+// 🎵 Autoplay after first click
+window.addEventListener("click", function() {
+    document.getElementById("bgMusic").play();
+}, { once: true });
+
+// Countdown
+const eventDate = new Date("May 11, 2026 15:00:00").getTime();
+
+setInterval(function(){
+    const now = new Date().getTime();
+    const distance = eventDate - now;
+
+    const days = Math.floor(distance/(1000*60*60*24));
+    const hours = Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+    const minutes = Math.floor((distance%(1000*60*60))/(1000*60));
+    const seconds = Math.floor((distance%(1000*60))/1000);
+
+    document.getElementById("countdown").innerHTML =
+      days + "d " + hours + "h " + minutes + "m " + seconds + "s";
+
+},1000);
+
 </script>
 
 </body>
