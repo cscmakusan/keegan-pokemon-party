@@ -139,14 +139,13 @@ button:hover {
 
 <script>
 
-// 🔥 YOUR GOOGLE SCRIPT URL
-const scriptURL = "https://script.google.com/macros/s/AKfycbxXzVc3sS7w5q9X8N7eLVh59V9Y8youdWvirCrRjfnOZjLTP5xtur4BfBGLpsRWfNsPHw/exec";
+const scriptURL = "https://script.google.com/macros/s/AKfycbytvN-Ecn68u3e7FykFffiZOo1UcJt9rzzUn9g798qaW3YwEMFCl8MD4-bbggjC_s9C1w/exec";
 
 function submitRSVP() {
 
-  const name = document.getElementById("name").value;
+  const name = document.getElementById("name").value.trim();
 
-  if(name.trim() === "") {
+  if (name === "") {
     document.getElementById("status").innerHTML = "⚠ Please enter your name.";
     return;
   }
@@ -157,28 +156,22 @@ function submitRSVP() {
     message: document.getElementById("message").value
   };
 
- fetch(scriptURL, {
-  method: "POST",
-  mode: "cors",
-  headers: {
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify(data)
-})
-.then(response => response.text())
-.then(res => {
+  fetch(scriptURL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(data)
+  })
+  .then(res => res.text())
+  .then(response => {
     document.getElementById("status").innerHTML = "✅ RSVP Sent!";
-})
-.catch(error => {
-    console.error(error);
+  })
+  .catch(error => {
+    console.error("Fetch error:", error);
     document.getElementById("status").innerHTML = "❌ Error sending RSVP";
-});
+  });
 }
-
-// 🎵 Autoplay after first click
-window.addEventListener("click", function() {
-    document.getElementById("bgMusic").play();
-}, { once: true });
 
 // Countdown
 const eventDate = new Date("May 11, 2026 15:00:00").getTime();
@@ -197,11 +190,18 @@ setInterval(function(){
 
 },1000);
 
+// Music autoplay after first click
+window.addEventListener("click", function() {
+    const music = document.getElementById("bgMusic");
+    if (music) music.play();
+}, { once: true });
+
 </script>
 
 </body>
 
 </html>
+
 
 
 
