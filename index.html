@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Keegan's 7th Birthday - Pokémon Party</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom right, #ffcb05, #3b4cca);
+            text-align: center;
+            color: white;
+        }
+
+        h1 {
+            margin-top: 20px;
+        }
+
+        .card {
+            background: white;
+            color: #333;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .countdown {
+            font-size: 24px;
+            font-weight: bold;
+            color: #e63946;
+        }
+
+        .gallery img {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin: 5px;
+        }
+
+        input {
+            padding: 8px;
+            margin: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 8px;
+            background-color: #3b4cca;
+            color: white;
+            cursor: pointer;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            background: #f1f1f1;
+            margin: 5px;
+            padding: 8px;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>⚡ Pokémon Party ⚡</h1>
+<h2>Keegan Alcaeus Velasco</h2>
+<h3>Turning 7 on May 11, 2026</h3>
+
+<div class="card">
+    <h3>📍 Location</h3>
+    <p>Alconaba Resort</p>
+
+    <h3>📅 Date</h3>
+    <p>May 11, 2026</p>
+
+    <h3>⏳ Countdown</h3>
+    <div id="countdown" class="countdown"></div>
+</div>
+
+<div class="card">
+    <h3>🎵 Party Music</h3>
+    <audio controls autoplay loop>
+        <source src="pokemon-theme.mp3" type="audio/mpeg">
+        Your browser does not support audio.
+    </audio>
+    <p>(Upload pokemon-theme.mp3 in same folder)</p>
+</div>
+
+<div class="card">
+    <h3>📸 Photo Gallery</h3>
+    <div class="gallery">
+        <img src="Keegan0.jpg">
+        <img src="Keegan2.jpg">
+        <img src="Keegan3.jpg">
+    </div>
+    <p>(Replace with Keegan's photos)</p>
+</div>
+
+<div class="card">
+    <h3>🎟 RSVP</h3>
+    <input type="text" id="guestName" placeholder="Your Name">
+    <button onclick="addGuest()">Confirm Attendance</button>
+
+    <h4>Guest List:</h4>
+    <ul id="guestList"></ul>
+</div>
+
+<script>
+    // Countdown Timer
+    const eventDate = new Date("May 11, 2026 15:00:00").getTime();
+
+    const timer = setInterval(function() {
+        const now = new Date().getTime();
+        const distance = eventDate - now;
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById("countdown").innerHTML =
+            days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+
+        if (distance < 0) {
+            clearInterval(timer);
+            document.getElementById("countdown").innerHTML = "🎉 Party Time! 🎉";
+        }
+    }, 1000);
+
+    // Guest List
+    function addGuest() {
+        const name = document.getElementById("guestName").value;
+        if (name === "") return;
+
+        const li = document.createElement("li");
+        li.textContent = name;
+        document.getElementById("guestList").appendChild(li);
+
+        document.getElementById("guestName").value = "";
+    }
+</script>
+
+</body>
+</html>
