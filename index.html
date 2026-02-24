@@ -106,7 +106,7 @@ h1, h2 {
     padding: 20px;
     margin: 20px auto;
     width: 90%;
-    max-width: 600px;
+    max-width: 900px;   /* Wider */
     box-shadow: 0 8px 25px rgba(0,0,0,0.2);
 
     animation: fadeUp 1s ease forwards;
@@ -154,11 +154,20 @@ button:hover {
 .slideshow {
   position: relative;
   width: 100%;
-  height: 250px;
+  height: 420px;   /* Bigger height */
   overflow: hidden;
   border-radius: 20px;
 }
 
+.slideshow.hero {
+  width: 100%;
+  max-width: 1100px;
+  height: 500px;
+  margin: 20px auto;
+  border-radius: 25px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+}
 .slide {
   position: absolute;
   inset: 0;
@@ -171,6 +180,9 @@ button:hover {
 
 .slide.active {
   opacity: 1;
+}
+.slide {
+  object-fit: cover;
 }
 
 /* ============================= */
@@ -278,9 +290,8 @@ button:hover {
 <h2>Keegan Alcaeus Velasco</h2>
 <h3>Turning 7 on May 11, 2026</h3>
 
-<div class="card">
-  <h3>📸 Keegean Alcaeus </h3>
-  <div class="slideshow">
+<h3 style="margin-top:40px;">📸 Party Memories</h3>
+<div class="slideshow hero">
     <img src="img1.jpg" class="slide active">
     <img src="img2.jpg" class="slide">
     <img src="img3.jpg" class="slide">
@@ -357,4 +368,5 @@ document.addEventListener("click", function() {
 
 </body>
 </html>
+
 
