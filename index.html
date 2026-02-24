@@ -6,6 +6,40 @@
 
 <style>
 
+
+    
+    /* Better spacing on small screens */
+@media (max-width: 600px) {
+
+  h1 { font-size: 24px; }
+  h2 { font-size: 18px; }
+  h3 { font-size: 16px; }
+
+  .card {
+    padding: 18px;
+    border-radius: 18px;
+  }
+
+  #countdown {
+    flex-wrap: wrap;
+  }
+
+  .count-box {
+    font-size: 16px;
+    min-width: 60px;
+    padding: 10px;
+  }
+
+  input, select {
+    width: 100%;
+    font-size: 14px;
+  }
+
+  button {
+    width: 100%;
+  }
+}
+
 body {
     margin:0;
     font-family: Arial, sans-serif;
@@ -25,21 +59,6 @@ body {
   0% { transform: translateY(0px); }
   50% { transform: translateY(-8px); }
   100% { transform: translateY(0px); }
-}
-
-.card {
-    background: rgba(255,255,255,0.82);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border-radius: 25px;
-    padding: 25px;
-    margin: 25px auto;
-    width: 90%;
-    max-width: 600px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    border: 2px solid rgba(255,255,255,0.4);
-    animation: floatCard 6s ease-in-out infinite;
-    transition: transform 0.3s ease;
 }
 
 /* Slight lift on hover */
@@ -81,13 +100,10 @@ button {
 
 /* Glow on hover */
 button:hover {
+    background:#2a35a0;
     box-shadow: 0 0 15px rgba(255, 203, 5, 0.8),
                 0 0 30px rgba(59, 76, 202, 0.6);
     transform: scale(1.08);
-}
-
-button:hover {
-    background:#2a35a0;
 }
 
 /* Floating Pokeballs */
@@ -116,15 +132,112 @@ button:hover {
     z-index: 2;
 }
 
+/* ===== Slideshow ===== */
+.slideshow {
+  position: relative;
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+  border-radius: 15px;
+}
+
+.slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.slide.active {
+  opacity: 1;
+}
+    
+/* ===== Countdown Style ===== */
+#countdown {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 15px;
+}
+
+    /* ===== Slideshow ===== */
+.count-box {
+  background: linear-gradient(135deg, #ffcb05, #ff3c00);
+  color: white;
+  padding: 12px;
+  border-radius: 15px;
+  font-size: 18px;
+  font-weight: bold;
+  min-width: 65px;
+  animation: pulse 1.5s infinite;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.count-box span {
+  display: block;
+  font-size: 11px;
+  margin-top: 4px;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+/* ===== Music Pokeball Button ===== */
+#musicToggle {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: radial-gradient(circle at top, red 50%, white 50%);
+  border: 4px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+  transition: transform 0.3s ease;
+  z-index: 999;
+}
+
+#musicToggle::after {
+  content: "";
+  position: absolute;
+  width: 70px;
+  height: 8px;
+  background: black;
+}
+
+#musicToggle:hover {
+  transform: scale(1.1) rotate(10deg);
+}
 </style>
 </head>
 
 <body>
 
+<div class="card">
+  <h3>📸 Party Memories</h3>
+
+  <div class="slideshow">
+    <img src="img1.jpg" class="slide active">
+    <img src="img2.jpg" class="slide">
+    <img src="img3.jpg" class="slide">
+  </div>
+</div>
+     
 <!-- 🎵 Background Music -->
-<audio id="bgMusic" loop>
+<audio id="bgMusic" autoplay loop>
   <source src="pokemon-theme.mp3" type="audio/mpeg">
 </audio>
+
+<div id="musicToggle">⚪</div>
 
 <!-- Floating Pokeballs -->
 <img src="pokemon-ball.png" class="pokeball" style="left:10%; animation-duration:12s;">
@@ -183,6 +296,18 @@ button:hover {
 
 <script>
 
+/* ===== Slideshow ===== */
+let slideIndex = 0;
+const slides = document.querySelectorAll(".slide");
+
+if (slides.length > 0) {
+  setInterval(() => {
+    slides[slideIndex].classList.remove("active");
+    slideIndex = (slideIndex + 1) % slides.length;
+    slides[slideIndex].classList.add("active");
+  }, 3000);
+}
+    
 const scriptURL = "https://script.google.com/macros/s/AKfycbx915QPdU0AkX5Sp9Qj7vopuU-17iCA6s2_0q8bqSb5u09JKL1bqyd_RLxuqHD5f1bZ6w/exec";
 
 function submitRSVP() {
@@ -217,6 +342,8 @@ function submitRSVP() {
   });
 }
 
+    
+
 // Countdown
 const eventDate = new Date("May 11, 2026 15:00:00").getTime();
 
@@ -239,17 +366,31 @@ setInterval(function(){
     `;
 },1000);
 
-// Music autoplay after first click
-window.addEventListener("click", function() {
-    const music = document.getElementById("bgMusic");
-    if (music) music.play();
+/* ===== Music Control ===== */
+const music = document.getElementById("bgMusic");
+const toggle = document.getElementById("musicToggle");
+
+toggle.addEventListener("click", function() {
+  if (music.paused) {
+    music.play();
+    toggle.style.opacity = "1";
+  } else {
+    music.pause();
+    toggle.style.opacity = "0.6";
+  }
+});
+
+/* Fix autoplay restriction */
+document.addEventListener("click", function() {
+  music.play().catch(() => {});
 }, { once: true });
 
 </script>
-
+    
 </body>
 
 </html>
+
 
 
 
