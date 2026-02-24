@@ -4,9 +4,16 @@
 <title>Keegan's 7th Pokémon Party</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">    
+    
 <style>
 
 
+    
+h1, h2 {
+  font-family: 'Press Start 2P', cursive;
+  letter-spacing: 2px;
+}
     
     /* Better spacing on small screens */
 @media (max-width: 600px) {
@@ -15,6 +22,8 @@
   h2 { font-size: 18px; }
   h3 { font-size: 16px; }
 
+  /* Pokémon-Style Pixel Font */
+   
   .card {
     padding: 18px;
     border-radius: 18px;
@@ -68,15 +77,21 @@ body {
     
 /* Cards */
 .card {
-    background: rgba(255, 255, 255, 0.8); /* 80% white */
-    backdrop-filter: blur(6px); /* optional glass effect */
-    -webkit-backdrop-filter: blur(6px); /* Safari support */
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
     border-radius: 20px;
     padding: 20px;
     margin: 20px auto;
     width: 90%;
     max-width: 600px;
     box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+
+    /* animation */
+    animation: fadeUp 1s ease forwards;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
 }
 
 /* Inputs */
@@ -132,20 +147,29 @@ button:hover {
     z-index: 2;
 }
 
+
+
+@keyframes fadeInPage {
+  to { opacity: 1; }
+}
+
+
 /* ===== Slideshow ===== */
 .slideshow {
   position: relative;
   width: 100%;
   height: 250px;
   overflow: hidden;
-  border-radius: 15px;
+  border-radius: 20px;
 }
 
 .slide {
   position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: 20px;
   opacity: 0;
   transition: opacity 1s ease-in-out;
 }
@@ -187,6 +211,8 @@ button:hover {
   100% { transform: scale(1); }
 }
 
+
+    
 /* ===== Music Pokeball Button ===== */
 #musicToggle {
   position: fixed;
@@ -217,6 +243,23 @@ button:hover {
 #musicToggle:hover {
   transform: scale(1.1) rotate(10deg);
 }
+body {
+    margin:0;
+    font-family: Arial, sans-serif;
+    text-align:center;
+    color:white;
+    background:
+        linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+        url('pokemon-back.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    overflow-x: hidden;
+
+    animation: fadeInPage 1.2s ease forwards;
+    opacity: 0;
+}
+    
 </style>
 </head>
 
@@ -231,6 +274,12 @@ button:hover {
 
 <div id="musicToggle">⚪</div>
 
+    <audio id="clickSound">
+  <source src="click.mp3" type="audio/mpeg">
+</audio>
+
+
+
 <!-- Floating Pokeballs -->
 <img src="pokemon-ball.png" class="pokeball" style="left:10%; animation-duration:12s;">
 <img src="pokemon-ball.png" class="pokeball" style="left:30%; animation-duration:18s;">
@@ -242,6 +291,8 @@ button:hover {
 <h1>⚡ Pokémon Party ⚡</h1>
 <h2>Keegan Alcaeus Velasco</h2>
 <h3>Turning 7 on May 11, 2026</h3>
+
+
     
 <!-- SLIDESHOW -->
 <div class="card">
@@ -281,7 +332,7 @@ button:hover {
 
 <input type="text" name="message" placeholder="Message (optional)"><br><br>
 
-<button type="submit">Submit</button>
+<button type="submit" onclick="playClick()">Submit</button>
 
 </form>
 
@@ -385,17 +436,22 @@ toggle.addEventListener("click", function() {
     toggle.style.opacity = "0.6";
   }
 });
-
+  
 /* Fix autoplay restriction */
 document.addEventListener("click", function() {
   music.play().catch(() => {});
 }, { once: true });
 
+function playClick() {
+  const click = document.getElementById("clickSound");
+  click.play();
+}
 </script>
     
 </body>
 
 </html>
+
 
 
 
