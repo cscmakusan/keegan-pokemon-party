@@ -5,247 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">    
-    
+
 <style>
 
+/* ============================= */
+/* GLOBAL STYLES */
+/* ============================= */
 
-    
-h1, h2 {
-  font-family: 'Press Start 2P', cursive;
-  letter-spacing: 2px;
-}
-    
-    /* Better spacing on small screens */
-@media (max-width: 600px) {
-
-  h1 { font-size: 24px; }
-  h2 { font-size: 18px; }
-  h3 { font-size: 16px; }
-
-  /* Pokémon-Style Pixel Font */
-   
-  .card {
-    padding: 18px;
-    border-radius: 18px;
-  }
-
-  #countdown {
-    flex-wrap: wrap;
-  }
-
-  .count-box {
-    font-size: 16px;
-    min-width: 60px;
-    padding: 10px;
-  }
-
-  input, select {
-    width: 100%;
-    font-size: 14px;
-  }
-
-  button {
-    width: 100%;
-  }
-}
-
-body {
-    margin:0;
-    font-family: Arial, sans-serif;
-    text-align:center;
-    color:white;
-    background:
-        linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
-        url('pokemon-back.jpg');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    overflow-x: hidden;
-}
-
-/* Floating animation */
-@keyframes floatCard {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-8px); }
-  100% { transform: translateY(0px); }
-}
-
-/* Slight lift on hover */
-.card:hover {
-    transform: translateY(-12px);
-}
-    
-/* Cards */
-.card {
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-    border-radius: 20px;
-    padding: 20px;
-    margin: 20px auto;
-    width: 90%;
-    max-width: 600px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-
-    /* animation */
-    animation: fadeUp 1s ease forwards;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: transform 0.3s ease;
-}
-
-/* Inputs */
-input, select {
-    padding:8px;
-    border-radius:6px;
-    border:1px solid #ccc;
-}
-
-/* Button */
-button {
-    padding: 12px 20px;
-    border: none;
-    border-radius: 12px;
-    background: linear-gradient(45deg, #3b4cca, #ffcb05);
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-/* Glow on hover */
-button:hover {
-    background:#2a35a0;
-    box-shadow: 0 0 15px rgba(255, 203, 5, 0.8),
-                0 0 30px rgba(59, 76, 202, 0.6);
-    transform: scale(1.08);
-}
-
-/* Floating Pokeballs */
-.pokeball {
-    position: fixed;
-    width: 70px;
-    opacity: 0.9;
-    animation: floatUp linear infinite;
-    z-index: 0;
-}
-
-@keyframes floatUp {
-    0% {
-        transform: translateY(100vh) rotate(0deg);
-        opacity: 0;
-    }
-    20% { opacity: 1; }
-    100% {
-        transform: translateY(-120vh) rotate(360deg);
-        opacity: 0;
-    }
-}
-
-.content {
-    position: relative;
-    z-index: 2;
-}
-
-
-
-@keyframes fadeUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-
-/* ===== Slideshow ===== */
-.slideshow {
-  position: relative;
-  width: 100%;
-  height: 250px;
-  overflow: hidden;
-  border-radius: 20px;
-}
-
-.slide {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 20px;
-  opacity: 0;
-  transition: opacity 1s ease-in-out;
-}
-
-.slide.active {
-  opacity: 1;
-}
-    
-/* ===== Countdown Style ===== */
-#countdown {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  margin-top: 15px;
-}
-
-    /* ===== Slideshow ===== */
-.count-box {
-  background: linear-gradient(135deg, #ffcb05, #ff3c00);
-  color: white;
-  padding: 12px;
-  border-radius: 15px;
-  font-size: 18px;
-  font-weight: bold;
-  min-width: 65px;
-  animation: pulse 1.5s infinite;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-}
-
-.count-box span {
-  display: block;
-  font-size: 11px;
-  margin-top: 4px;
-}
-
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.08); }
-  100% { transform: scale(1); }
-}
-
-
-    
-/* ===== Music Pokeball Button ===== */
-#musicToggle {
-  position: fixed;
-  bottom: 25px;
-  right: 25px;
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  background: radial-gradient(circle at top, red 50%, white 50%);
-  border: 4px solid black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.4);
-  transition: transform 0.3s ease;
-  z-index: 999;
-}
-
-#musicToggle::after {
-  content: "";
-  position: absolute;
-  width: 70px;
-  height: 8px;
-  background: black;
-}
-
-#musicToggle:hover {
-  transform: scale(1.1) rotate(10deg);
-}
 body {
     margin:0;
     font-family: Arial, sans-serif;
@@ -262,28 +28,245 @@ body {
     animation: fadeInPage 1.2s ease forwards;
     opacity: 0;
 }
-    
+
+h1, h2 {
+  font-family: 'Press Start 2P', cursive;
+  letter-spacing: 2px;
+}
+
+/* ============================= */
+/* MOBILE */
+/* ============================= */
+
+@media (max-width: 600px) {
+  h1 { font-size: 24px; }
+  h2 { font-size: 18px; }
+  h3 { font-size: 16px; }
+
+  .card {
+    padding: 18px;
+    border-radius: 18px;
+  }
+
+  #countdown { flex-wrap: wrap; }
+
+  .count-box {
+    font-size: 16px;
+    min-width: 60px;
+    padding: 10px;
+  }
+
+  input, select, button {
+    width: 100%;
+    font-size: 14px;
+  }
+}
+
+/* ============================= */
+/* ANIMATIONS */
+/* ============================= */
+
+@keyframes fadeInPage {
+  to { opacity: 1; }
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+    }
+    20% { opacity: 1; }
+    100% {
+        transform: translateY(-120vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+/* ============================= */
+/* CARD STYLE */
+/* ============================= */
+
+.card {
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(6px);
+    border-radius: 20px;
+    padding: 20px;
+    margin: 20px auto;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+
+    animation: fadeUp 1s ease forwards;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+}
+
+/* ============================= */
+/* FORM */
+/* ============================= */
+
+input, select {
+    padding:8px;
+    border-radius:6px;
+    border:1px solid #ccc;
+}
+
+button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(45deg, #3b4cca, #ffcb05);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background:#2a35a0;
+    box-shadow: 0 0 15px rgba(255,203,5,0.8),
+                0 0 30px rgba(59,76,202,0.6);
+    transform: scale(1.08);
+}
+
+/* ============================= */
+/* SLIDESHOW */
+/* ============================= */
+
+.slideshow {
+  position: relative;
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.slide.active {
+  opacity: 1;
+}
+
+/* ============================= */
+/* COUNTDOWN */
+/* ============================= */
+
+#countdown {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 15px;
+}
+
+.count-box {
+  background: linear-gradient(135deg, #ffcb05, #ff3c00);
+  color: white;
+  padding: 12px;
+  border-radius: 15px;
+  font-size: 18px;
+  font-weight: bold;
+  min-width: 65px;
+  animation: pulse 1.5s infinite;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.count-box span {
+  display:block;
+  font-size:11px;
+  margin-top:4px;
+}
+
+/* ============================= */
+/* FLOATING POKEBALLS */
+/* ============================= */
+
+.pokeball {
+    position: fixed;
+    width: 70px;
+    opacity: 0.9;
+    animation: floatUp linear infinite;
+    z-index: 0;
+}
+
+.content {
+    position: relative;
+    z-index: 2;
+}
+
+/* ============================= */
+/* MUSIC BUTTON */
+/* ============================= */
+
+#musicToggle {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: radial-gradient(circle at top, red 50%, white 50%);
+  border: 4px solid black;
+  cursor: pointer;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+  transition: transform 0.3s ease;
+  z-index: 999;
+}
+
+#musicToggle::after {
+  content:"";
+  position:absolute;
+  width:70px;
+  height:8px;
+  background:black;
+  top:50%;
+  transform:translateY(-50%);
+}
+
+#musicToggle:hover {
+  transform: scale(1.1) rotate(10deg);
+}
+
 </style>
 </head>
 
 <body>
 
-
-     
-<!-- 🎵 Background Music -->
 <audio id="bgMusic" autoplay loop>
   <source src="pokemon-theme.mp3" type="audio/mpeg">
 </audio>
 
-<div id="musicToggle">⚪</div>
-
-    <audio id="clickSound">
+<audio id="clickSound">
   <source src="click.mp3" type="audio/mpeg">
 </audio>
 
+<div id="musicToggle"></div>
 
-
-<!-- Floating Pokeballs -->
 <img src="pokemon-ball.png" class="pokeball" style="left:10%; animation-duration:12s;">
 <img src="pokemon-ball.png" class="pokeball" style="left:30%; animation-duration:18s;">
 <img src="pokemon-ball.png" class="pokeball" style="left:60%; animation-duration:15s;">
@@ -295,12 +278,8 @@ body {
 <h2>Keegan Alcaeus Velasco</h2>
 <h3>Turning 7 on May 11, 2026</h3>
 
-
-    
-<!-- SLIDESHOW -->
 <div class="card">
   <h3>📸 Party Memories</h3>
-
   <div class="slideshow">
     <img src="img1.jpg" class="slide active">
     <img src="img2.jpg" class="slide">
@@ -308,55 +287,24 @@ body {
   </div>
 </div>
 
-    <!-- CountDown -->
 <div class="card">
 <h3>📅 May 11, 2026</h3>
 <h3>📍 Alconaba Resort</h3>
-
 <h3>⏳ Countdown</h3>
 <div id="countdown"></div>
 </div>
 
-    <!-- Are you Coming -->
-<div class="card">
-<h3>◓⃙ Are you coming? ◓⃙ </h3>
-
-<form action="https://script.google.com/macros/s/AKfycbx915QPdU0AkX5Sp9Qj7vopuU-17iCA6s2_0q8bqSb5u09JKL1bqyd_RLxuqHD5f1bZ6w/exec"
-  method="POST"
-  target="hidden_iframe"
-  onsubmit="document.getElementById('status').innerHTML='✅ Confirmation Sent!';">
-    
-<input type="text" name="name" placeholder="Your Name" required><br><br>
-
-<select name="attending">
-  <option value="Yes">Yes, I'll be there!</option>
-  <option value="No">Sorry, can't come</option>
-</select><br><br>
-
-<input type="text" name="message" placeholder="Message (optional)"><br><br>
-
-<button type="submit" onclick="playClick()">Submit</button>
-
-</form>
-
-<iframe name="hidden_iframe" style="display:none;"></iframe>
-
-<p id="status"></p>
-
-</div>
-
-<!-- MAP -->
 <div class="card">
 <h3>🗺 Location Map</h3>
-<iframe 
-  src="https://www.google.com/maps?q=Alconaba+Resort&output=embed"
-  width="100%" height="300" style="border:0;">
-</iframe>
+<iframe src="https://www.google.com/maps?q=Alconaba+Resort&output=embed"
+width="100%" height="300" style="border:0;"></iframe>
 </div>
-    
+
+</div>
+
 <script>
 
-/* ===== Slideshow ===== */
+/* Slideshow */
 let slideIndex = 0;
 const slides = document.querySelectorAll(".slide");
 
@@ -367,114 +315,45 @@ if (slides.length > 0) {
     slides[slideIndex].classList.add("active");
   }, 3000);
 }
-    
-const scriptURL = "https://script.google.com/macros/s/AKfycbx915QPdU0AkX5Sp9Qj7vopuU-17iCA6s2_0q8bqSb5u09JKL1bqyd_RLxuqHD5f1bZ6w/exec";
 
-function submitRSVP() {
-
-  const name = document.getElementById("name").value.trim();
-
-  if (name === "") {
-    document.getElementById("status").innerHTML = "⚠ Please enter your name.";
-    return;
-  }
-
-  const data = {
-    name: name,
-    attending: document.getElementById("attending").value,
-    message: document.getElementById("message").value
-  };
-
-  fetch(scriptURL, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(data)
-  })
-  .then(res => res.text())
-  .then(response => {
-    document.getElementById("status").innerHTML = "✅ RSVP Sent!";
-  })
-  .catch(error => {
-    console.error("Fetch error:", error);
-    document.getElementById("status").innerHTML = "❌ Error sending RSVP";
-  });
-}
-
-    
-
-// Countdown
+/* Countdown */
 const eventDate = new Date("May 11, 2026 15:00:00").getTime();
-
 const countdownEl = document.getElementById("countdown");
 
 setInterval(function(){
-    const now = new Date().getTime();
-    const distance = eventDate - now;
+  const now = new Date().getTime();
+  const distance = eventDate - now;
 
-    const days = Math.floor(distance/(1000*60*60*24));
-    const hours = Math.floor((distance%(1000*60*60*24))/(1000*60*60));
-    const minutes = Math.floor((distance%(1000*60*60))/(1000*60));
-    const seconds = Math.floor((distance%(1000*60))/1000);
+  const days = Math.floor(distance/(1000*60*60*24));
+  const hours = Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+  const minutes = Math.floor((distance%(1000*60*60))/(1000*60));
+  const seconds = Math.floor((distance%(1000*60))/1000);
 
-    countdownEl.innerHTML = `
-      <div class="count-box">${days}<span>Days</span></div>
-      <div class="count-box">${hours}<span>Hours</span></div>
-      <div class="count-box">${minutes}<span>Minutes</span></div>
-      <div class="count-box">${seconds}<span>Seconds</span></div>
-    `;
+  countdownEl.innerHTML = `
+    <div class="count-box">${days}<span>Days</span></div>
+    <div class="count-box">${hours}<span>Hours</span></div>
+    <div class="count-box">${minutes}<span>Minutes</span></div>
+    <div class="count-box">${seconds}<span>Seconds</span></div>
+  `;
 },1000);
 
-/* ===== Music Control ===== */
+/* Music */
 const music = document.getElementById("bgMusic");
 const toggle = document.getElementById("musicToggle");
 
 toggle.addEventListener("click", function() {
   if (music.paused) {
     music.play();
-    toggle.style.opacity = "1";
   } else {
     music.pause();
-    toggle.style.opacity = "0.6";
   }
 });
-  
-/* Fix autoplay restriction */
+
 document.addEventListener("click", function() {
   music.play().catch(() => {});
 }, { once: true });
 
-function playClick() {
-  const click = document.getElementById("clickSound");
-  click.play();
-}
 </script>
-    
+
 </body>
-
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
