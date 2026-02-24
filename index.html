@@ -222,15 +222,7 @@ button:hover {
 
 <body>
 
-<div class="card">
-  <h3>📸 Party Memories</h3>
 
-  <div class="slideshow">
-    <img src="img1.jpg" class="slide active">
-    <img src="img2.jpg" class="slide">
-    <img src="img3.jpg" class="slide">
-  </div>
-</div>
      
 <!-- 🎵 Background Music -->
 <audio id="bgMusic" autoplay loop>
@@ -250,7 +242,19 @@ button:hover {
 <h1>⚡ Pokémon Party ⚡</h1>
 <h2>Keegan Alcaeus Velasco</h2>
 <h3>Turning 7 on May 11, 2026</h3>
+    
+<!-- SLIDESHOW -->
+<div class="card">
+  <h3>📸 Party Memories</h3>
 
+  <div class="slideshow">
+    <img src="img1.jpg" class="slide active">
+    <img src="img2.jpg" class="slide">
+    <img src="img3.jpg" class="slide">
+  </div>
+</div>
+
+    <!-- CountDown -->
 <div class="card">
 <h3>📅 May 11, 2026</h3>
 <h3>📍 Alconaba Resort</h3>
@@ -259,14 +263,7 @@ button:hover {
 <div id="countdown"></div>
 </div>
 
-<div class="card">
-<h3>🗺 Location Map</h3>
-<iframe 
-  src="https://www.google.com/maps?q=Alconaba+Resort&output=embed"
-  width="100%" height="300" style="border:0;">
-</iframe>
-</div>
-
+    <!-- Are you Coming -->
 <div class="card">
 <h3>◓⃙ Are you coming? ◓⃙ </h3>
 
@@ -294,6 +291,15 @@ button:hover {
 
 </div>
 
+<!-- MAP -->
+<div class="card">
+<h3>🗺 Location Map</h3>
+<iframe 
+  src="https://www.google.com/maps?q=Alconaba+Resort&output=embed"
+  width="100%" height="300" style="border:0;">
+</iframe>
+</div>
+    
 <script>
 
 /* ===== Slideshow ===== */
@@ -390,6 +396,7 @@ document.addEventListener("click", function() {
 </body>
 
 </html>
+
 
 
 
