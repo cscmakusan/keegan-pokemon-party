@@ -173,17 +173,13 @@ button:hover {
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   opacity: 0;
   transition: opacity 1s ease-in-out;
 }
 
 .slide.active {
   opacity: 1;
-}
-.slide {
-  object-fit: contain;
-  background: black;
 }
 
 /* ============================= */
@@ -287,11 +283,11 @@ button:hover {
 
 <div class="content">
 
-<h1>⚡ Pokémon Party ⚡</h1>
-<h2>Keegan Alcaeus Velasco</h2>
+<h1>⚡ You Are Invited! ⚡</h1>
+<h2> Pokemon Party </h2>
 <h3>Turning 7 on May 11, 2026</h3>
 
-<h3 style="margin-top:40px;">📸 Party Memories</h3>
+<h3 style="margin-top:40px;">📸 Keegan Alcaeus Velasco</h3>
 <div class="slideshow hero">
     <img src="img1.jpg" class="slide active">
     <img src="img2.jpg" class="slide">
@@ -299,6 +295,32 @@ button:hover {
   </div>
 </div>
 
+<div class="card">
+<h3>◓⃙ Are you coming? ◓⃙</h3>
+
+<form action="https://script.google.com/macros/s/AKfycbx915QPdU0AkX5Sp9Qj7vopuU-17iCA6s2_0q8bqSb5u09JKL1bqyd_RLxuqHD5f1bZ6w/exec"
+  method="POST"
+  target="hidden_iframe"
+  onsubmit="document.getElementById('status').innerHTML='✅ Confirmation Sent!';">
+
+<input type="text" name="name" placeholder="Your Name" required><br><br>
+
+<select name="attending">
+  <option value="Yes">Yes, I'll be there!</option>
+  <option value="No">Sorry, can't come</option>
+</select><br><br>
+
+<input type="text" name="message" placeholder="Message (optional)"><br><br>
+
+<button type="submit">Submit</button>
+
+</form>
+
+<iframe name="hidden_iframe" style="display:none;"></iframe>
+<p id="status"></p>
+
+</div>
+    
 <div class="card">
 <h3>📅 May 11, 2026</h3>
 <h3>📍 Alconaba Resort</h3>
@@ -310,8 +332,6 @@ button:hover {
 <h3>🗺 Location Map</h3>
 <iframe src="https://www.google.com/maps?q=Alconaba+Resort&output=embed"
 width="100%" height="300" style="border:0;"></iframe>
-</div>
-
 </div>
 
 <script>
@@ -369,6 +389,7 @@ document.addEventListener("click", function() {
 
 </body>
 </html>
+
 
 
 
